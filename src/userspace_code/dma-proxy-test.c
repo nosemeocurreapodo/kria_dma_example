@@ -368,7 +368,7 @@ int main(int argc, char *argv[])
 		strcat(channel_name, tx_channel_names[i]);
 		tx_channels[i].fd = open(channel_name, O_RDWR);
 		if (tx_channels[i].fd < 1) {
-			printf("Unable to open DMA proxy device file: %s\r", channel_name);
+			printf("Unable to open DMA proxy device file: %s\n", channel_name);
 			exit(EXIT_FAILURE);
 		}
 		tx_channels[i].buf_ptr = (struct channel_buffer *)mmap(NULL, sizeof(struct channel_buffer) * TX_BUFFER_COUNT,
@@ -386,7 +386,7 @@ int main(int argc, char *argv[])
 		strcat(channel_name, rx_channel_names[i]);
 		rx_channels[i].fd = open(channel_name, O_RDWR);
 		if (rx_channels[i].fd < 1) {
-			printf("Unable to open DMA proxy device file: %s\r", channel_name);
+			printf("Unable to open DMA proxy device file: %s\n", channel_name);
 			exit(EXIT_FAILURE);
 		}
 		rx_channels[i].buf_ptr = (struct channel_buffer *)mmap(NULL, sizeof(struct channel_buffer) * RX_BUFFER_COUNT,
