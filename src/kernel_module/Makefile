@@ -7,20 +7,23 @@
 #                                     KERNEL_SRC=/opt/linux-xlnx-5.15
 # ---------------------------------------------------------------------------
 
-# Path to the *prepared* kernel tree you want to build against.
-#  * Native default = running kernel headers.
-#  * Override for cross-compilation.
-KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
-
 # Cross-compiler triplet (leave empty for native).
 CROSS_COMPILE ?=
 ARCH          ?= $(shell uname -m)   # overridden automatically by CROSS_COMPILE
+SYSROOT       ?=  $(SDKTARGETSYSROOT)        # e.g. /opt/petalinux/2023.2/sysroots/aarch64
+
+# Path to the *prepared* kernel tree you want to build against.
+#  * Native default = running kernel headers.
+#  * Override for cross-compilation.
+#KERNEL_SRC ?= $(SYSROOT)/lib/modules/$(shell uname -r)/build
+#KERNEL_SRC ?= $(SYSROOT)/lib/modules/6.6.40-xilinx-g2b7f6f70a62a/build
+KERNEL_SRC = /home/emanuel/workspace/xilinx-zynqmp-common-v2024.2/sysroots/sysroots/cortexa72-cortexa53-xilinx-linux/lib/modules/6.6.40-xilinx-g2b7f6f70a62a/build
 
 # Header directory you want on the module’s include path
-INC := $(PWD)/../Software/Common
+INC := $(PWD)/../common
 ccflags-y := -I$(INC)                # ccflags-y is preferred over EXTRA_CFLAGS
 
-obj-m := dma_proxy.o
+obj-m := dma-proxy.o
 
 # ---------------------------------------------------------------------------
 # Targets

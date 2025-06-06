@@ -6,8 +6,8 @@ SYSROOT       ?=  $(SDKTARGETSYSROOT)        # e.g. /opt/petalinux/2023.2/sysroo
 # Toolchain & flags
 # -----------------------------------------------------------------------------
 
-CC      := $(XILINX_VITIS)/gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-gcc
-#CC      := $(CROSS_COMPILE)gcc
+#CC      := $(XILINX_VITIS)/gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-gcc
+CC      := $(CROSS_COMPILE)gcc
 TARGET  := dma-proxy-test
 SRCS    := dma-proxy-test.c
 OBJS    := $(SRCS:.c=.o)
