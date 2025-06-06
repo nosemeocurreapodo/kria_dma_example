@@ -1,3 +1,7 @@
+device_tree/.Xil
+device_tree/build/
+hardware_design/build
+
 # Prerequisites
 *.d
 
