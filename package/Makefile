@@ -20,4 +20,4 @@ $(PACKAGE_PATH): create_json
 	@echo "then load the kernel module"
 	@echo "sudo insmod dma-proxy.ko"
 	@echo "Go to /lib/firmware/xilinx/dma-proxy directory and run application"
-	@echo "$ ./dma-proxy-test "
+	@echo "sudo ./dma-proxy-test "
