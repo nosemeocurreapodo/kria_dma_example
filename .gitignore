@@ -3,6 +3,7 @@ device_tree/build/
 hardware_design/build
 src/userspace_code/build
 ser/kernel_module/build
+package/package
 
 # Prerequisites
 *.d

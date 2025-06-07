@@ -9,7 +9,7 @@ DTB_BUILD_PATH=$(BUILD_PATH)/dtb
 DT_PLAT_NAME=mydeivice
 DT_PATH=$(DTB_BUILD_PATH)/$(DT_PLAT_NAME)/psu_cortexa53_0/device_tree_domain/bsp
 
-all: dtb dtbo create_json
+all: dtb dtbo
 
 dtb:
 	@echo "execute createdts to generate dtb file"
@@ -24,6 +24,3 @@ dtbo: $(DT_PATH)/pl.dtsi
 	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/system-user.dtsi
 
 	cp $(DT_PATH)/pl.dtbo $(DTB_BUILD_PATH)/
-
-create_json:
-	cd $(BUILD_PATH) && printf '{\n  "shell_type" : "XRT_FLAT",\n  "num_slots": "1"\n}' > shell.json
