@@ -1,22 +1,24 @@
-# -----------------------------------------------------------------------------
-#CROSS_COMPILE ?=          # e.g. aarch64-linux-gnu-
-SYSROOT       ?=  $(SDKTARGETSYSROOT)        # e.g. /opt/petalinux/2023.2/sysroots/aarch64
+# ---------------------------------------------------------------------------
+#  dma-proxy-test – user-space benchmark
+#
+#  Native build ……………  $ make
+#  Cross build …………   $ make CROSS_COMPILE=aarch64-linux-gnu- \
+#                            SYSROOT=/opt/petalinux/sysroots/aarch64  \
+#                            BUILD_DIR=build-aarch64
+# ---------------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-# Toolchain & flags
-# -----------------------------------------------------------------------------
+# ------------  configurable knobs  -----------------------------------------
+CROSS_COMPILE ?= 
+SYSROOT       ?= $(SDKTARGETSYSROOT)
+BUILD_DIR     ?= build
+INC_DIR       ?=                       # add -I path here if dma-proxy.h is elsewhere
+TARGET        := $(BUILD_DIR)/dma-proxy-test
+SRCS          := dma-proxy-test.c
+OBJS          := $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 
-#CC      := $(XILINX_VITIS)/gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-gcc
 CC      := $(CROSS_COMPILE)gcc
-TARGET  := dma-proxy-test
-SRCS    := dma-proxy-test.c
-OBJS    := $(SRCS:.c=.o)
-
-# Where dma-proxy.h lives if it is NOT in the same directory.
-# Leave empty or set INC_DIR=/some/path when you invoke make.
-INC_DIR ?= ../common
-
-CFLAGS  := -Wall -O3 -std=gnu11 -pthread
+CFLAGS  := -Wall -O3 -std=gnu11 -pthread -I../common
+LDFLAGS := -pthread
 ifeq ($(strip $(INC_DIR)),)
 else
 CFLAGS  += -I$(INC_DIR)
@@ -26,21 +28,23 @@ else
 CFLAGS  += --sysroot=$(SYSROOT)
 LDFLAGS += --sysroot=$(SYSROOT)
 endif
+# ---------------------------------------------------------------------------
 
-LDFLAGS += -pthread
+.PHONY: all clean dirs
 
-# -----------------------------------------------------------------------------
-# Rules
-# -----------------------------------------------------------------------------
 all: $(TARGET)
 
+# Create the out-of-tree build directory once
+dirs: ; @mkdir -p $(BUILD_DIR)
+
+# Pattern rule: build/<file>.o from <file>.c
+$(BUILD_DIR)/%.o: %.c | dirs
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Final link step
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Built $@"
 
 clean:
-	@$(RM) $(OBJS) $(TARGET)
-
-.PHONY: all clean
+	@rm -rf $(BUILD_DIR)

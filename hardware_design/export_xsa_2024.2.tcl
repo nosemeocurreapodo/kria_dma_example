@@ -54,10 +54,10 @@ generate_target all [get_files [current_bd_design].bd]
 
 # Write expandable XSA to vivado directory
 # update_compile_order -fileset sources_1
-# launch_runs impl_1 -to_step write_bitstream -jobs [numberOfCPUs]
-# wait_on_run impl_1
-# open_run impl_1
-# write_hw_platform -include_bit -force -file ./kv260_hardware_platform.xsa
-write_hw_platform -force -include_sim_content -file ./kv260_hardware_platform.xsa
+launch_runs impl_1 -to_step write_bitstream -jobs [numberOfCPUs]
+wait_on_run impl_1
+open_run impl_1
+write_hw_platform -include_bit -force -file ./kv260_hardware_platform.xsa
+# write_hw_platform -force -include_sim_content -file ./kv260_hardware_platform.xsa
 
 

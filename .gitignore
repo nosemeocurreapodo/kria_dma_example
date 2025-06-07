@@ -1,6 +1,8 @@
 device_tree/.Xil
 device_tree/build/
 hardware_design/build
+src/userspace_code/build
+ser/kernel_module/build
 
 # Prerequisites
 *.d
