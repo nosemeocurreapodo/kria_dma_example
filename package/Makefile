@@ -17,5 +17,7 @@ $(PACKAGE_PATH): create_json
 	@echo "then use xmutil to load hardware."
 	@echo "xmutil unloadapp"
 	@echo "xmutil loadapp dma-proxy"
+	@echo "then load the kernel module"
+	@echo "sudo insmod dma-proxy.ko"
 	@echo "Go to /lib/firmware/xilinx/dma-proxy directory and run application"
 	@echo "$ ./dma-proxy-test "
