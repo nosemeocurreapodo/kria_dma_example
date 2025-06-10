@@ -7,9 +7,9 @@ ROOT_DIR=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 ABS_BUILD_PATH=$(ROOT_DIR)/build
 ABS_HW_PATH=$(ABS_BUILD_PATH)/vivado
 VERSION ?=2024.2
-BD_TCL=block_design_$(VERSION).tcl
+BD_TCL=block_design_zcu104_$(VERSION).tcl
 ABS_BD_TCL=$(ROOT_DIR)/$(BD_TCL)
-XSA_TCL=export_xsa_$(VERSION).tcl
+XSA_TCL=export_xsa_zcu104_$(VERSION).tcl
 ABS_XSA_TCL=$(ROOT_DIR)/$(XSA_TCL)
 
 .PHONY: help
