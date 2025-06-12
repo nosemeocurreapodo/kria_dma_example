@@ -21,6 +21,6 @@ dtbo: $(DT_PATH)/pl.dtsi
 	cp system-user.dtsi $(DT_PATH)/
 
 #	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/pl.dtsi
-	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/system-user.dtsi
+	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/system-user_write.dtsi
 
 	cp $(DT_PATH)/pl.dtbo $(DTB_BUILD_PATH)/
