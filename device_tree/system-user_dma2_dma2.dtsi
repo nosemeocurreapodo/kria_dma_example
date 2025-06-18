@@ -1,0 +1,9 @@
+/include/ "pl.dtsi"
+
+&amba {
+    dma_proxy {   
+        compatible ="xlnx,dma_proxy";   
+        dmas = <&axi_dma_1 0  &axi_dma_0 1 &axi_dma_2 1 &axi_dma_3 0>;
+        dma-names = "dma_proxy_tx_1", "dma_proxy_rx_1", "dma_proxy_rx_2", "dma_proxy_tx_2";
+    };
+};
