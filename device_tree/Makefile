@@ -9,6 +9,8 @@ DTB_BUILD_PATH=$(BUILD_PATH)/dtb
 DT_PLAT_NAME=mydeivice
 DT_PATH=$(DTB_BUILD_PATH)/$(DT_PLAT_NAME)/psu_cortexa53_0/device_tree_domain/bsp
 
+USER_DTSI=system-user_dma_read_dma_write.dtsi
+
 all: dtb dtbo
 
 dtb:
@@ -18,9 +20,9 @@ dtb:
 #   -dtsi system-user.dtsi
 
 dtbo: $(DT_PATH)/pl.dtsi
-	cp system-user_dma_fifo_dma.dtsi $(DT_PATH)/
+	cp $(USER_DTSI) $(DT_PATH)/
 
 #	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/pl.dtsi
-	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/system-user_dma_fifo_dma.dtsi
+	dtc -@ -O dtb -o $(DT_PATH)/pl.dtbo $(DT_PATH)/$(USER_DTSI)
 
 	cp $(DT_PATH)/pl.dtbo $(DTB_BUILD_PATH)/
